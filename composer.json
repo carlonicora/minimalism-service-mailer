@@ -21,7 +21,6 @@
   },
   "require": {
     "php": "^7.4",
-    "ext-json": "*",
     "carlonicora/minimalism": "~10.0",
     "phpmailer/phpmailer": "*",
     "sendgrid/sendgrid": "~7"
