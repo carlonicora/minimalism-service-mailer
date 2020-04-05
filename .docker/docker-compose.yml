@@ -1,8 +1,8 @@
 version: '3.7'
 
 services:
-  minimalism-mailer:
-    container_name: minimalism-mailer
+  minimalism-service-mailer:
+    container_name: minimalism-service-mailer
     image: carlonicora/php-cli-base:7.4.3.2
     working_dir: /app
     volumes:

@@ -1,8 +1,8 @@
 <?php
 namespace carlonicora\minimalism\services\mailer\configurations;
 
-use carlonicora\minimalism\core\exceptions\configurationException;
 use carlonicora\minimalism\core\services\abstracts\abstractServiceConfigurations;
+use carlonicora\minimalism\core\services\exceptions\configurationException;
 
 class mailerConfigurations extends abstractServiceConfigurations {
     /** @var string|null  */
