@@ -21,27 +21,27 @@ class mailerConfigurations extends abstractServiceConfigurations {
     public ?string $senderName=null;
 
     /**
-     * mailingConfigurations constructor.
+     * MAILERConfigurations constructor.
      * @throws configurationException
      */
     public function __construct() {
         $this->mailerClass = '\\carlonicora\\minimalism\\services\\mailer\\modules\\' .
-            (getenv('MINIMALISM_SERVICE_MAILING_TYPE') ?: 'mandrillapp') .
+            (getenv('MINIMALISM_SERVICE_MAILER_TYPE') ?: 'mandrillapp') .
             'MailerService';
 
         if (!class_exists($this->mailerClass)){
             throw new configurationException('mailer', 'The selected mailer service does not exists!');
         }
 
-        if (!getenv('MINIMALISM_SERVICE_MAILING_PASSWORD')) {
-            throw new configurationException('mailer', 'MINIMALISM_SERVICE_MAILING_PASSWORD is a required configuration');
+        if (!getenv('MINIMALISM_SERVICE_MAILER_PASSWORD')) {
+            throw new configurationException('mailer', 'MINIMALISM_SERVICE_MAILER_PASSWORD is a required configuration');
         }
 
-        $this->username = getenv('MINIMALISM_SERVICE_MAILING_USERNAME');
-        $this->password = getenv('MINIMALISM_SERVICE_MAILING_PASSWORD');
+        $this->username = getenv('MINIMALISM_SERVICE_MAILER_USERNAME');
+        $this->password = getenv('MINIMALISM_SERVICE_MAILER_PASSWORD');
 
-        $this->senderEmail = getenv('MINIMALISM_SERVICE_MAILING_SENDER_EMAIL');
-        $this->senderName = getenv('MINIMALISM_SERVICE_MAILING_SENDER_NAME');
+        $this->senderEmail = getenv('MINIMALISM_SERVICE_MAILER_SENDER_EMAIL');
+        $this->senderName = getenv('MINIMALISM_SERVICE_MAILER_SENDER_NAME');
     }
 
     /**
