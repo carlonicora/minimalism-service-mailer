@@ -33,13 +33,11 @@ class mailerConfigurations extends abstractServiceConfigurations {
             throw new configurationException('mailer', 'The selected mailer service does not exists!');
         }
 
-        if (!getenv('MINIMALISM_SERVICE_MAILER_PASSWORD')) {
+        if (!($this->password = getenv('MINIMALISM_SERVICE_MAILER_PASSWORD'))) {
             throw new configurationException('mailer', 'MINIMALISM_SERVICE_MAILER_PASSWORD is a required configuration');
         }
 
         $this->username = getenv('MINIMALISM_SERVICE_MAILER_USERNAME');
-        $this->password = getenv('MINIMALISM_SERVICE_MAILER_PASSWORD');
-
         $this->senderEmail = getenv('MINIMALISM_SERVICE_MAILER_SENDER_EMAIL');
         $this->senderName = getenv('MINIMALISM_SERVICE_MAILER_SENDER_NAME');
     }
