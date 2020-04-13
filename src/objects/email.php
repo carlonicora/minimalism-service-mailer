@@ -7,6 +7,7 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use Twig\Loader\ArrayLoader;
+use Twig\Loader\ChainLoader;
 use Twig\Loader\FilesystemLoader;
 
 class email {
@@ -28,20 +29,18 @@ class email {
     /** @var string|null */
     private ?string $templateName=null;
 
+    /** @var string|null  */
+    private ?string $templateDirectory=null;
     /**
      * email constructor.
      * @param string $subject
-     * @param string|null $templateName
-     * @param string|array|null $templateDirectory
+     * @param string|null $templateDirectory
      */
-    public function __construct(string $subject, ?string $templateName=null, $templateDirectory=null) {
+    public function __construct(string $subject, ?string $templateDirectory=null) {
         $this->subject = $subject;
 
-        if ($templateName !== null) {
-            $this->templateName = $templateName;
-
-            $loader = new FilesystemLoader($templateDirectory);
-            $this->template = new Environment($loader);
+        if ($templateDirectory !== null) {
+            $this->templateDirectory = $templateDirectory;
         }
     }
 
@@ -57,9 +56,32 @@ class email {
      */
     public function addTemplate(string $template): void {
         $this->templateName = 'email.twig';
-        $loader = new ArrayLoader([
+        $arrayLoader = new ArrayLoader([
             $this->templateName => $template
         ]);
+
+        if ($this->templateDirectory !== null){
+            $filesystemLoader = new FilesystemLoader($this->templateDirectory);
+            $loader = new ChainLoader([$arrayLoader, $filesystemLoader]);
+        } else {
+            $loader = new ChainLoader([$arrayLoader]);
+        }
+
+        $this->template = new Environment($loader);
+    }
+
+    /**
+     * @param string $templateName
+     */
+    public function addTemplateFile(string $templateName): void {
+        if ($this->templateDirectory === null) {
+            throw new RuntimeException('A template directory is required to use a template file');
+        }
+
+        $this->templateName = $templateName;
+
+        $loader = new FilesystemLoader($this->templateDirectory);
+
         $this->template = new Environment($loader);
     }
 
