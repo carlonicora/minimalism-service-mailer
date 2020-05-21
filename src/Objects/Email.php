@@ -1,5 +1,5 @@
 <?php
-namespace carlonicora\minimalism\services\mailer\Oobjects;
+namespace CarloNicora\Minimalism\Services\Mailer\Objects;
 
 use RuntimeException;
 use Twig\Environment;
@@ -10,7 +10,8 @@ use Twig\Loader\ArrayLoader;
 use Twig\Loader\ChainLoader;
 use Twig\Loader\FilesystemLoader;
 
-class eemail {
+class Email
+{
     /** @var array  */
     public array $recipients = [];
 
@@ -36,7 +37,8 @@ class eemail {
      * @param string $subject
      * @param string|null $templateDirectory
      */
-    public function __construct(string $subject, ?string $templateDirectory=null) {
+    public function __construct(string $subject, ?string $templateDirectory=null)
+    {
         $this->subject = $subject;
 
         if ($templateDirectory !== null) {
@@ -47,14 +49,16 @@ class eemail {
     /**
      * @param string $body
      */
-    public function addBody(string $body) : void{
+    public function addBody(string $body) : void
+    {
         $this->body = $body;
     }
 
     /**
      * @param string $template
      */
-    public function addTemplate(string $template): void {
+    public function addTemplate(string $template): void
+    {
         $this->templateName = 'email.twig';
         $arrayLoader = new ArrayLoader([
             $this->templateName => $template
@@ -73,7 +77,8 @@ class eemail {
     /**
      * @param string $templateName
      */
-    public function addTemplateFile(string $templateName): void {
+    public function addTemplateFile(string $templateName): void
+    {
         if ($this->templateDirectory === null) {
             throw new RuntimeException('A template directory is required to use a template file');
         }
@@ -89,7 +94,8 @@ class eemail {
      * @param string $email
      * @param string $name
      */
-    public function addRecipient(string $email, string $name): void{
+    public function addRecipient(string $email, string $name): void
+    {
         $this->recipients[] = [
             'email' => $email,
             'name' => $name
@@ -99,7 +105,8 @@ class eemail {
     /**
      * @param array $parameters
      */
-    public function addParameters(array $parameters): void {
+    public function addParameters(array $parameters): void
+    {
         try {
             $this->body = $this->template->render($this->templateName, $parameters);
         } catch (LoaderError $e) {

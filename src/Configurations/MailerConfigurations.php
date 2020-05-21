@@ -1,10 +1,10 @@
 <?php
-namespace carlonicora\minimalism\services\mailer\Cconfigurations;
+namespace CarloNicora\Minimalism\Services\Mailer\Configurations;
 
-use carlonicora\minimalism\core\services\abstracts\abstractServiceConfigurations;
-use carlonicora\minimalism\core\services\exceptions\configurationException;
+use CarloNicora\Minimalism\core\Services\Abstracts\AbstractServiceConfigurations;
+use CarloNicora\Minimalism\core\Services\Exceptions\configurationException;
 
-class mmailerConfigurations extends abstractServiceConfigurations {
+class MailerConfigurations extends AbstractServiceConfigurations {
     /** @var string|null  */
     public ?string $username=null;
 
@@ -24,17 +24,18 @@ class mmailerConfigurations extends abstractServiceConfigurations {
      * MAILERConfigurations constructor.
      * @throws configurationException
      */
-    public function __construct() {
-        $this->mailerClass = '\\carlonicora\\minimalism\\services\\mailer\\modules\\' .
+    public function __construct()
+    {
+        $this->mailerClass = '\\CarloNicora\\Minimalism\\Services\\Mailer\\Modules\\' .
             (getenv('MINIMALISM_SERVICE_MAILER_TYPE') ?: 'mandrillapp') .
             'MailerService';
 
         if (!class_exists($this->mailerClass)){
-            throw new configurationException('mailer', 'The selected mailer service does not exists!');
+            throw new ConfigurationException('mailer', 'The selected mailer service does not exists!');
         }
 
         if (!($this->password = getenv('MINIMALISM_SERVICE_MAILER_PASSWORD'))) {
-            throw new configurationException('mailer', 'MINIMALISM_SERVICE_MAILER_PASSWORD is a required configuration');
+            throw new ConfigurationException('mailer', 'MINIMALISM_SERVICE_MAILER_PASSWORD is a required configuration');
         }
 
         $this->username = getenv('MINIMALISM_SERVICE_MAILER_USERNAME');
@@ -45,7 +46,8 @@ class mmailerConfigurations extends abstractServiceConfigurations {
     /**
      * @return string
      */
-    public function getMailerClass() : string {
+    public function getMailerClass() : string
+    {
         return $this->mailerClass;
     }
 }

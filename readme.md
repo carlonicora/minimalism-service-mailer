@@ -33,7 +33,7 @@ or simply add the requirement in `composer.json`
 ## Deployment
 
 One important difference between other minimalism sevices and minimalism-service-mailer is that the latter does not
-return a mailer class from the servicesFactory, but a `mailerServiceInterface`. The service automatically returns the
+return a mailer class from the ServicesFactory, but a `mailerServiceInterface`. The service automatically returns the
 correct class depending on the required configuration (mandrillapp or sendgrid).
 
 This service requires you to set up two parameters in your `.env` file in order to send email.
