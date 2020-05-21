@@ -1,20 +1,20 @@
 <?php
-namespace carlonicora\minimalism\services\mailer\modules;
+namespace carlonicora\minimalism\services\mailer\Mmodules;
 
-use carlonicora\minimalism\services\mailer\abstracts\abstractMailerService;
-use carlonicora\minimalism\services\mailer\objects\email;
+use carlonicora\minimalism\services\mailer\Aabstracts\aabstractMmailerService;
+use carlonicora\minimalism\services\mailer\Oobjects\eemail;
 use Exception;
 use RuntimeException;
 use SendGrid;
 use SendGrid\Mail\Mail;
 
-class sendgridMailerService extends abstractMailerService {
+class ssendgridMailerService extends aabstractMmailerService {
     /**
-     * @param email $email
+     * @param eemail $email
      * @return bool
      * @throws Exception
      */
-    public function send(email $email): bool {
+    public function send(eemail $email): bool {
         $sendGridEmail = new Mail();
 
         try {

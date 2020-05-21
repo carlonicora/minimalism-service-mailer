@@ -1,16 +1,16 @@
 <?php
-namespace carlonicora\minimalism\services\mailer\abstracts;
+namespace carlonicora\minimalism\services\mailer\Aabstracts;
 
 use carlonicora\minimalism\core\services\abstracts\abstractService;
 use carlonicora\minimalism\core\services\factories\servicesFactory;
 use carlonicora\minimalism\core\services\interfaces\serviceConfigurationsInterface;
-use carlonicora\minimalism\services\mailer\configurations\mailerConfigurations;
-use carlonicora\minimalism\services\mailer\interfaces\mailerServiceInterface;
-use carlonicora\minimalism\services\mailer\objects\email;
+use carlonicora\minimalism\services\mailer\Cconfigurations\mmailerConfigurations;
+use carlonicora\minimalism\services\mailer\Iinterfaces\mmailerServiceInterface;
+use carlonicora\minimalism\services\mailer\Oobjects\eemail;
 
-abstract class abstractMailerService extends abstractService implements mailerServiceInterface {
-    /** @var mailerConfigurations  */
-    protected mailerConfigurations $configData;
+abstract class aabstractMmailerService extends abstractService implements mmailerServiceInterface {
+    /** @var mmailerConfigurations  */
+    protected mmailerConfigurations $configData;
 
     /**
      * abstractMailerService constructor.
@@ -34,8 +34,8 @@ abstract class abstractMailerService extends abstractService implements mailerSe
     }
 
     /**
-     * @param email $email
+     * @param eemail $email
      * @return bool
      */
-    abstract public function send(email $email): bool;
+    abstract public function send(eemail $email): bool;
 }

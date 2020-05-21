@@ -1,10 +1,10 @@
 <?php
-namespace carlonicora\minimalism\services\mailer\configurations;
+namespace carlonicora\minimalism\services\mailer\Cconfigurations;
 
 use carlonicora\minimalism\core\services\abstracts\abstractServiceConfigurations;
 use carlonicora\minimalism\core\services\exceptions\configurationException;
 
-class mailerConfigurations extends abstractServiceConfigurations {
+class mmailerConfigurations extends abstractServiceConfigurations {
     /** @var string|null  */
     public ?string $username=null;
 

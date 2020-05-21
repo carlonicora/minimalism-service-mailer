@@ -1,13 +1,13 @@
 <?php
-namespace carlonicora\minimalism\services\mailer\modules;
+namespace carlonicora\minimalism\services\mailer\Mmodules;
 
-use carlonicora\minimalism\services\mailer\abstracts\abstractMailerService;
-use carlonicora\minimalism\services\mailer\objects\email;
+use carlonicora\minimalism\services\mailer\Aabstracts\aabstractMmailerService;
+use carlonicora\minimalism\services\mailer\Oobjects\eemail;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use RuntimeException;
 
-class mandrillappMailerService extends abstractMailerService {
+class mmandrillappMailerService extends aabstractMmailerService {
     /** @var string  */
     private string $host = 'smtp.mandrillapp.com';
 
@@ -17,7 +17,7 @@ class mandrillappMailerService extends abstractMailerService {
     /**
      * @inheritDoc
      */
-    public function send(email $email): bool {
+    public function send(eemail $email): bool {
         $mail = new PHPMailer();
 
         $mail->IsSMTP();

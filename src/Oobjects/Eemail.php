@@ -1,5 +1,5 @@
 <?php
-namespace carlonicora\minimalism\services\mailer\objects;
+namespace carlonicora\minimalism\services\mailer\Oobjects;
 
 use RuntimeException;
 use Twig\Environment;
@@ -10,7 +10,7 @@ use Twig\Loader\ArrayLoader;
 use Twig\Loader\ChainLoader;
 use Twig\Loader\FilesystemLoader;
 
-class email {
+class eemail {
     /** @var array  */
     public array $recipients = [];
 
