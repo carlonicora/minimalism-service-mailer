@@ -4,7 +4,8 @@ namespace CarloNicora\Minimalism\Services\Mailer\Configurations;
 use CarloNicora\Minimalism\core\Services\Abstracts\AbstractServiceConfigurations;
 use CarloNicora\Minimalism\core\Services\Exceptions\configurationException;
 
-class MailerConfigurations extends AbstractServiceConfigurations {
+class MailerConfigurations extends AbstractServiceConfigurations
+{
     /** @var string|null  */
     public ?string $username=null;
 

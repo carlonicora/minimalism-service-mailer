@@ -8,7 +8,8 @@ use RuntimeException;
 use SendGrid;
 use SendGrid\Mail\Mail;
 
-class SendgridMailerService extends AbstractMailerService {
+class SendgridMailerService extends AbstractMailerService
+{
     /**
      * @param Email $email
      * @return bool

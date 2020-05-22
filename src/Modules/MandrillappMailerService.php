@@ -7,7 +7,8 @@ use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use RuntimeException;
 
-class MandrillappMailerService extends AbstractMailerService {
+class MandrillappMailerService extends AbstractMailerService
+{
     /** @var string  */
     private string $host = 'smtp.mandrillapp.com';
 

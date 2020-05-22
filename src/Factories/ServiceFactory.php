@@ -7,7 +7,8 @@ use CarloNicora\Minimalism\core\Services\Factories\ServicesFactory;
 use CarloNicora\Minimalism\Services\Mailer\Configurations\MailerConfigurations;
 use CarloNicora\Minimalism\Services\Mailer\Interfaces\MailerServiceInterface;
 
-class ServiceFactory extends AbstractServiceFactory {
+class ServiceFactory extends AbstractServiceFactory
+{
     /**
      * serviceFactory constructor.
      * @param ServicesFactory $services

@@ -8,7 +8,8 @@ use CarloNicora\Minimalism\Services\Mailer\Configurations\MailerConfigurations;
 use CarloNicora\Minimalism\Services\Mailer\Interfaces\MailerServiceInterface;
 use CarloNicora\Minimalism\Services\Mailer\Objects\Email;
 
-abstract class AbstractMailerService extends AbstractService implements MailerServiceInterface {
+abstract class AbstractMailerService extends AbstractService implements MailerServiceInterface
+{
     /** @var MailerConfigurations  */
     protected MailerConfigurations $configData;
 
