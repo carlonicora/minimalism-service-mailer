@@ -2,17 +2,17 @@
 namespace CarloNicora\Minimalism\Services\Mailer\Factories;
 
 use CarloNicora\Minimalism\Core\Services\Abstracts\AbstractServiceFactory;
-use CarloNicora\Minimalism\Core\Services\Exceptions\ConfigurationException;
 use CarloNicora\Minimalism\Core\Services\Factories\ServicesFactory;
 use CarloNicora\Minimalism\Services\Mailer\Configurations\MailerConfigurations;
 use CarloNicora\Minimalism\Services\Mailer\Interfaces\MailerServiceInterface;
+use Exception;
 
 class ServiceFactory extends AbstractServiceFactory
 {
     /**
-     * serviceFactory constructor.
+     * ServiceFactory constructor.
      * @param ServicesFactory $services
-     * @throws ConfigurationException
+     * @throws Exception
      */
     public function __construct(ServicesFactory $services)
     {

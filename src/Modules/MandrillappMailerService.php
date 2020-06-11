@@ -2,8 +2,10 @@
 namespace CarloNicora\Minimalism\Services\Mailer\Modules;
 
 use CarloNicora\Minimalism\Services\Mailer\Abstracts\AbstractMailerService;
+use CarloNicora\Minimalism\Services\Mailer\Events\ErrorManager;
 use CarloNicora\Minimalism\Services\Mailer\Objects\Email;
-use PHPMailer\PHPMailer\Exception;
+use Exception;
+use PHPMailer\PHPMailer\Exception as MailerException;
 use PHPMailer\PHPMailer\PHPMailer;
 use RuntimeException;
 
@@ -16,7 +18,9 @@ class MandrillappMailerService extends AbstractMailerService
     private int $port = 587;
 
     /**
-     * @inheritDoc
+     * @param Email $email
+     * @return bool
+     * @throws Exception
      */
     public function send(Email $email): bool
     {
@@ -42,17 +46,20 @@ class MandrillappMailerService extends AbstractMailerService
         foreach ($email->recipients as $recipient) {
             try {
                 $mail->AddAddress($recipient['email'], $recipient['name']);
-            } catch (Exception $e) {
-                throw new RuntimeException('Invalid email');
+            } catch (MailerException $e) {
+                $this->services->logger()->error()->log(ErrorManager::INVALID_EMAIL($e))
+                    ->throw(RuntimeException::class);
             }
         }
 
         try {
             if (!$mail->Send()) {
-                throw new RuntimeException('Email cannot be sent: ' . $mail->ErrorInfo);
+                $this->services->logger()->error()->log(ErrorManager::EMAIL_NOT_SENT($mail->ErrorInfo))
+                    ->throw(RuntimeException::class);
             }
-        } catch (Exception $e) {
-            throw new RuntimeException('Email cannot be sent: ' . $mail->ErrorInfo);
+        } catch (MailerException $e) {
+            $this->services->logger()->error()->log(ErrorManager::FAILED_TO_SEND_EMAIL($e))
+                ->throw(RuntimeException::class);
         }
 
         return true;

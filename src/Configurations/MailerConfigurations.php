@@ -1,8 +1,10 @@
 <?php
 namespace CarloNicora\Minimalism\Services\Mailer\Configurations;
 
+use CarloNicora\Minimalism\Core\Events\MinimalismErrorEvents;
 use CarloNicora\Minimalism\Core\Services\Abstracts\AbstractServiceConfigurations;
 use CarloNicora\Minimalism\Core\Services\Exceptions\ConfigurationException;
+use Exception;
 
 class MailerConfigurations extends AbstractServiceConfigurations
 {
@@ -22,8 +24,8 @@ class MailerConfigurations extends AbstractServiceConfigurations
     public ?string $senderName=null;
 
     /**
-     * MAILERConfigurations constructor.
-     * @throws ConfigurationException
+     * MailerConfigurations constructor.
+     * @throws Exception
      */
     public function __construct()
     {
@@ -32,11 +34,14 @@ class MailerConfigurations extends AbstractServiceConfigurations
             'MailerService';
 
         if (!class_exists($this->mailerClass)){
-            throw new ConfigurationException('mailer', 'The selected mailer service does not exists!');
+            MinimalismErrorEvents::CONFIGURATION_ERROR('The mailer service "' . $this->mailerClass
+                . '" does not exists! Incorrect MINIMALISM_SERVICE_MAILER_TYPE environment variable.')
+                ->throw(ConfigurationException::class);
         }
 
         if (!($this->password = getenv('MINIMALISM_SERVICE_MAILER_PASSWORD'))) {
-            throw new ConfigurationException('mailer', 'MINIMALISM_SERVICE_MAILER_PASSWORD is a required configuration');
+            MinimalismErrorEvents::CONFIGURATION_ERROR('MINIMALISM_SERVICE_MAILER_PASSWORD is a required configuration')
+                ->throw(ConfigurationException::class);
         }
 
         $this->username = getenv('MINIMALISM_SERVICE_MAILER_USERNAME');
