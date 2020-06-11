@@ -1,8 +1,8 @@
 <?php
 namespace CarloNicora\Minimalism\Services\Mailer\Configurations;
 
-use CarloNicora\Minimalism\core\Services\Abstracts\AbstractServiceConfigurations;
-use CarloNicora\Minimalism\core\Services\Exceptions\configurationException;
+use CarloNicora\Minimalism\Core\Services\Abstracts\AbstractServiceConfigurations;
+use CarloNicora\Minimalism\Core\Services\Exceptions\ConfigurationException;
 
 class MailerConfigurations extends AbstractServiceConfigurations
 {
@@ -23,7 +23,7 @@ class MailerConfigurations extends AbstractServiceConfigurations
 
     /**
      * MAILERConfigurations constructor.
-     * @throws configurationException
+     * @throws ConfigurationException
      */
     public function __construct()
     {

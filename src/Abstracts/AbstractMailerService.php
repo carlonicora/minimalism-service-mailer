@@ -1,9 +1,8 @@
 <?php
 namespace CarloNicora\Minimalism\Services\Mailer\Abstracts;
 
-use CarloNicora\Minimalism\core\Services\Abstracts\AbstractService;
-use CarloNicora\Minimalism\core\Services\Factories\ServicesFactory;
-use CarloNicora\Minimalism\core\Services\Interfaces\serviceConfigurationsInterface;
+use CarloNicora\Minimalism\Core\Services\Abstracts\AbstractService;
+use CarloNicora\Minimalism\Core\Services\Factories\ServicesFactory;
 use CarloNicora\Minimalism\Services\Mailer\Configurations\MailerConfigurations;
 use CarloNicora\Minimalism\Services\Mailer\Interfaces\MailerServiceInterface;
 use CarloNicora\Minimalism\Services\Mailer\Objects\Email;
@@ -15,10 +14,10 @@ abstract class AbstractMailerService extends AbstractService implements MailerSe
 
     /**
      * abstractMailerService constructor.
-     * @param ServiceConfigurationsInterface $configData
+     * @param MailerConfigurations $configData
      * @param ServicesFactory $services
      */
-    public function __construct(ServiceConfigurationsInterface $configData, ServicesFactory $services)
+    public function __construct(MailerConfigurations $configData, ServicesFactory $services)
     {
         parent::__construct($configData, $services);
 
