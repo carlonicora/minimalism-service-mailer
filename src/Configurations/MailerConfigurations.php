@@ -30,7 +30,7 @@ class MailerConfigurations extends AbstractServiceConfigurations
     public function __construct()
     {
         $this->mailerClass = '\\CarloNicora\\Minimalism\\Services\\Mailer\\Modules\\' .
-            (getenv('MINIMALISM_SERVICE_MAILER_TYPE') ?: 'mandrillapp') .
+            (getenv('MINIMALISM_SERVICE_MAILER_TYPE') ?: 'Mandrillapp') .
             'MailerService';
 
         if (!class_exists($this->mailerClass)){
