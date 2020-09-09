@@ -32,14 +32,14 @@ class Email
     /** @var string|null */
     private ?string $templateName=null;
 
-    /** @var string|null  */
-    private ?string $templateDirectory=null;
+    /** @var array|null  */
+    private ?array $templateDirectory=null;
     /**
      * email constructor.
      * @param string $subject
-     * @param string|null $templateDirectory
+     * @param array|null $templateDirectory
      */
-    public function __construct(string $subject, ?string $templateDirectory=null)
+    public function __construct(string $subject, ?array $templateDirectory=null)
     {
         $this->subject = $subject;
 
