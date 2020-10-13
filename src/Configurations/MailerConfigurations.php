@@ -17,7 +17,7 @@ class MailerConfigurations extends AbstractServiceConfigurations
     /** @var string  */
     public string $mailerClass;
 
-    /** @var string  */
+    /** @var string|null  */
     public ?string $senderEmail=null;
 
     /** @var string|null  */

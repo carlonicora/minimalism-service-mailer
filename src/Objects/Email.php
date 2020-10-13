@@ -17,7 +17,7 @@ class Email
     /** @var array  */
     public array $recipients = [];
 
-    /** @var string  */
+    /** @var string|null  */
     public ?string $subject=null;
 
     /** @var string|null  */
