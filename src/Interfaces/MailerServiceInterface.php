@@ -1,20 +1,10 @@
 <?php
 namespace CarloNicora\Minimalism\Services\Mailer\Interfaces;
 
-use CarloNicora\Minimalism\Core\Services\Factories\ServicesFactory;
-use CarloNicora\Minimalism\Services\Mailer\Configurations\MailerConfigurations;
 use CarloNicora\Minimalism\Services\Mailer\Objects\Email;
 
 interface MailerServiceInterface
-{
-    /**
-     * mailerServiceInterface constructor.
-     * @param MailerConfigurations $configurations
-     * @param ServicesFactory $services
-     */
-    public function __construct(MailerConfigurations $configurations, ServicesFactory $services);
-
-    /**
+{    /**
      * @param string $senderEmail
      * @param string $senderName
      */

@@ -1,7 +1,6 @@
 <?php
 namespace CarloNicora\Minimalism\Services\Mailer\Objects;
 
-use CarloNicora\Minimalism\Services\Mailer\Events\ErrorManager;
 use Exception;
 use RuntimeException;
 use Twig\Environment;
@@ -83,7 +82,7 @@ class Email
     public function addTemplateFile(string $templateName): void
     {
         if ($this->templateDirectory === null) {
-            ErrorManager::NO_TEMPLATE_DIRECTORY()->throw(RuntimeException::class);
+            throw new RuntimeException('No configured email template directory', 500);
         }
 
         $this->templateName = $templateName;
@@ -113,8 +112,8 @@ class Email
     {
         try {
             $this->body = $this->template->render($this->templateName, $parameters);
-        } catch (LoaderError | RuntimeError | SyntaxError $e) {
-            ErrorManager::FAILED_TO_CREATE_EMAIL_BODY($e)->throw(RuntimeException::class);
+        } catch (LoaderError | RuntimeError | SyntaxError) {
+            throw new RuntimeException('Error creating the email content', 500);
         }
     }
 }

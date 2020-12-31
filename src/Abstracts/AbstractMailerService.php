@@ -1,28 +1,27 @@
 <?php
 namespace CarloNicora\Minimalism\Services\Mailer\Abstracts;
 
-use CarloNicora\Minimalism\Core\Services\Abstracts\AbstractService;
-use CarloNicora\Minimalism\Core\Services\Factories\ServicesFactory;
-use CarloNicora\Minimalism\Services\Mailer\Configurations\MailerConfigurations;
 use CarloNicora\Minimalism\Services\Mailer\Interfaces\MailerServiceInterface;
 use CarloNicora\Minimalism\Services\Mailer\Objects\Email;
 
-abstract class AbstractMailerService extends AbstractService implements MailerServiceInterface
+abstract class AbstractMailerService implements MailerServiceInterface
 {
-    /** @var MailerConfigurations  */
-    protected MailerConfigurations $configData;
+    /** @var string|null  */
+    protected ?string $senderEmail=null;
+
+    /** @var string|null  */
+    protected ?string $senderName=null;
 
     /**
-     * abstractMailerService constructor.
-     * @param MailerConfigurations $configData
-     * @param ServicesFactory $services
+     * AbstractMailerService constructor.
+     * @param string|null $username
+     * @param string|null $password
      */
-    public function __construct(MailerConfigurations $configData, ServicesFactory $services)
+    public function __construct(
+        protected ?string $username,
+        protected ?string $password,
+    )
     {
-        parent::__construct($configData, $services);
-
-        /** @noinspection PhpFieldAssignmentTypeMismatchInspection */
-        $this->configData = $configData;
     }
 
     /**
@@ -31,8 +30,8 @@ abstract class AbstractMailerService extends AbstractService implements MailerSe
      */
     final public function setSender(string $senderEmail, string $senderName): void
     {
-        $this->configData->senderEmail = $senderEmail;
-        $this->configData->senderName = $senderName;
+        $this->senderEmail = $senderEmail;
+        $this->senderName = $senderName;
     }
 
     /**

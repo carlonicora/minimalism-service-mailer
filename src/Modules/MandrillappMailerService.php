@@ -2,7 +2,6 @@
 namespace CarloNicora\Minimalism\Services\Mailer\Modules;
 
 use CarloNicora\Minimalism\Services\Mailer\Abstracts\AbstractMailerService;
-use CarloNicora\Minimalism\Services\Mailer\Events\ErrorManager;
 use CarloNicora\Minimalism\Services\Mailer\Objects\Email;
 use Exception;
 use PHPMailer\PHPMailer\Exception as MailerException;
@@ -11,10 +10,10 @@ use RuntimeException;
 
 class MandrillappMailerService extends AbstractMailerService
 {
-    /** @var string  */
+    /** @var string */
     private string $host = 'smtp.mandrillapp.com';
 
-    /** @var int  */
+    /** @var int */
     private int $port = 587;
 
     /**
@@ -33,11 +32,11 @@ class MandrillappMailerService extends AbstractMailerService
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = 'tls';
 
-        $mail->Username = $this->configData->username;
-        $mail->Password = $this->configData->password;
+        $mail->Username = $this->username;
+        $mail->Password = $this->password;
 
-        $mail->From = $this->configData->senderEmail;
-        $mail->FromName = $this->configData->senderName;
+        $mail->From = $this->senderEmail;
+        $mail->FromName = $this->senderName;
 
         $mail->IsHTML(true);
         $mail->Subject = $email->subject;
@@ -46,20 +45,17 @@ class MandrillappMailerService extends AbstractMailerService
         foreach ($email->recipients as $recipient) {
             try {
                 $mail->AddAddress($recipient['email'], $recipient['name']);
-            } catch (MailerException $e) {
-                $this->services->logger()->error()->log(ErrorManager::INVALID_EMAIL($e))
-                    ->throw(RuntimeException::class);
+            } catch (MailerException) {
+                throw new RuntimeException('Invalid sender email', 500);
             }
         }
 
         try {
             if (!$mail->Send()) {
-                $this->services->logger()->error()->log(ErrorManager::EMAIL_NOT_SENT($mail->ErrorInfo))
-                    ->throw(RuntimeException::class);
+                throw new RuntimeException($mail->ErrorInfo, 500);
             }
-        } catch (MailerException $e) {
-            $this->services->logger()->error()->log(ErrorManager::FAILED_TO_SEND_EMAIL($e))
-                ->throw(RuntimeException::class);
+        } catch (MailerException) {
+            throw new RuntimeException('Error sending the email', 500);
         }
 
         return true;

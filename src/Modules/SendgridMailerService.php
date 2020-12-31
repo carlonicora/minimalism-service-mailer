@@ -2,7 +2,6 @@
 namespace CarloNicora\Minimalism\Services\Mailer\Modules;
 
 use CarloNicora\Minimalism\Services\Mailer\Abstracts\AbstractMailerService;
-use CarloNicora\Minimalism\Services\Mailer\Events\ErrorManager;
 use CarloNicora\Minimalism\Services\Mailer\Objects\Email;
 use Exception;
 use RuntimeException;
@@ -22,10 +21,9 @@ class SendgridMailerService extends AbstractMailerService
         $sendGridEmail = new Mail();
 
         try {
-            $sendGridEmail->setFrom($this->configData->senderEmail, $this->configData->senderName);
-        } catch (TypeException $e) {
-            $this->services->logger()->error()->log(ErrorManager::SENDGRID_FAILED_TO_SET_FROM($e))
-                ->throw(RuntimeException::class);
+            $sendGridEmail->setFrom($this->senderEmail, $this->senderName);
+        } catch (TypeException) {
+            throw new RuntimeException('Email failed to be sent from the sender', 500);
         }
 
         foreach ($email->recipients as $recipient) {
@@ -34,14 +32,13 @@ class SendgridMailerService extends AbstractMailerService
 
         try {
             $sendGridEmail->setSubject($email->subject);
-        } catch (TypeException $e) {
-            $this->services->logger()->error()->log(ErrorManager::SENDGRID_FAILED_TO_SET_SUBJECT($e))
-                ->throw(RuntimeException::class);
+        } catch (TypeException) {
+            throw new RuntimeException('Email failed to be sent to recipient', 500);
         }
 
         $sendGridEmail->addContent($email->contentType, $email->body);
 
-        $sendgrid = new SendGrid($this->configData->password);
+        $sendgrid = new SendGrid($this->password);
         $sendgrid->send($sendGridEmail);
 
         return true;

@@ -1,7 +1,7 @@
 {
   "name": "carlonicora/minimalism-service-mailer",
   "description": "Mailer service for minimalism",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "homepage": "https://carlonicora.com",
   "time": "2019-05-14",
   "license": "MIT",
@@ -20,19 +20,11 @@
       "CarloNicora\\Minimalism\\Services\\Mailer\\":"src/"
     }
   },
-  "autoload-dev": {
-    "psr-4": {
-      "CarloNicora\\Minimalism\\Services\\Mailer\\Tests\\":"tests/"
-    }
-  },
-  "require-dev": {
-    "phpunit/phpunit": "^9"
-  },
   "require": {
-    "php": "^7.4",
-    "carlonicora/minimalism": "~11.0",
-    "phpmailer/phpmailer": "*",
-    "sendgrid/sendgrid": "~7",
-    "twig/twig":"~2.0"
+    "php": ">=8.0",
+    "carlonicora/minimalism": "~12.0",
+    "phpmailer/phpmailer": "~v6.2.0",
+    "sendgrid/sendgrid": "~7.9",
+    "twig/twig":"~3.1"
   }
 }
