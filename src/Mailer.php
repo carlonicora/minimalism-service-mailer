@@ -24,14 +24,14 @@ class Mailer implements ServiceInterface, MailerServiceInterface
      */
     public function __construct(
         string $MINIMALISM_SERVICE_MAILER_TYPE,
-        ?string $MINIMALISM_SERVICE_MAILER_USERNAME,
         string $MINIMALISM_SERVICE_MAILER_PASSWORD,
-        ?string $MINIMALISM_SERVICE_MAILER_SENDER_EMAIL,
-        ?string $MINIMALISM_SERVICE_MAILER_SENDER_NAME,
+        ?string $MINIMALISM_SERVICE_MAILER_USERNAME=null,
+        ?string $MINIMALISM_SERVICE_MAILER_SENDER_EMAIL=null,
+        ?string $MINIMALISM_SERVICE_MAILER_SENDER_NAME=null,
     )
     {
         $mailerClass = '\\CarloNicora\\Minimalism\\Services\\Mailer\\Modules\\'
-            . $MINIMALISM_SERVICE_MAILER_TYPE;
+            . $MINIMALISM_SERVICE_MAILER_TYPE . 'MailerService';
 
         if (!class_exists($mailerClass)){
             throw new RuntimeException('Configured mailer type not supported', 500);
