@@ -94,9 +94,9 @@ class Email
 
     /**
      * @param string $email
-     * @param string $name
+     * @param string|null $name
      */
-    public function addRecipient(string $email, string $name): void
+    public function addRecipient(string $email, string $name = null): void
     {
         $this->recipients[] = [
             'email' => $email,
