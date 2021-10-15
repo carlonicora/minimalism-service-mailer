@@ -1,12 +1,12 @@
 {
   "name": "carlonicora/minimalism-service-mailer",
   "description": "Mailer service for minimalism",
-  "version": "3.0.3",
+  "version": "3.0.4-beta1",
   "homepage": "https://carlonicora.com",
   "time": "2019-05-14",
   "license": "MIT",
   "type": "library",
-  "minimum-stability": "stable",
+  "minimum-stability": "beta",
   "authors": [
     {
       "name": "Carlo Nicora",
@@ -22,7 +22,7 @@
   },
   "require": {
     "php": ">=8.0",
-    "carlonicora/minimalism": "~12.0",
+    "carlonicora/minimalism": "~13.0",
     "phpmailer/phpmailer": "~6.2",
     "sendgrid/sendgrid": "~7.9",
     "twig/twig":"~3.1"
